@@ -1,0 +1,21 @@
+#A singularity script to run the repo
+#https://github.com/intelligentEarth/Bayeslands-basin-continental
+#Developed inthe docker cotainer
+
+#Build with:
+#sudo singularity build --writable pybad.img pybad.txt
+
+#Typically run on a HPC environemnt with:
+
+# module load singularity
+# singularity exec pybad.img 
+
+Bootstrap: docker
+From: nbutter/pybad
+
+#These directories are mounted on Artemis, so we add them here
+%post
+mkdir /short
+
+%runscript
+exec /bin/bash
