@@ -4,18 +4,21 @@
 
 #Build with:
 #sudo singularity build --writable pybad.img pybad.txt
+#or if you don't need to change anything...
+#singularity pull docker://nbutter/pybad
 
-#Typically run on a HPC environemnt with:
+#Typically run on a HPC environemnt with something like this:
 
 # module load singularity
-# singularity exec pybad.img 
+# singularity exec pybad.img python ptBayeslands.py -p 1 -s 100 -r 10 -t 2 -swap 2 -b 0.25 -pt 0.5  -epsilon 0.5 -rain_intervals 4
 
 Bootstrap: docker
 From: nbutter/pybad
 
-#These directories are mounted on Artemis, so we add them here
+#These directories are mounted on Artemis and NCI, so we add them here to bind in at runtime.
+#Change these as required by your HPC cluster
 %post
-mkdir /short
+mkdir /short /projects /project /scratch
 
 %runscript
 exec /bin/bash
