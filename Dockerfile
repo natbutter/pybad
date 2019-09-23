@@ -32,7 +32,7 @@ RUN wget https://www.open-mpi.org/software/ompi/v1.10/downloads/openmpi-1.10.3.t
 	tar -xzvf ./openmpi-1.10.3.tar.gz && \
 	cd openmpi-1.10.3 && \
 	./configure --prefix=/usr/local/mpi && \
-	make -j all && \
+	make all && \
 	make install
 
 #Install additional Python modules
@@ -52,4 +52,4 @@ ENV PYTHON_PATH $PYTHON_PATH:/workspace/Bayeslands-basin-continental/pyBadlands/
 
 #And actuall install Bayeslands to python
 RUN pip install -e Bayeslands-basin-continental/
-
+WORKDIR /workspace/Bayeslands-basin-continental
